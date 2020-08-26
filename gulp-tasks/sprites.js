@@ -18,7 +18,7 @@ gulp.task("sprites", () => {
                 }
             }
         }))
-        .pipe(gulp.dest(paths.sprites.dist))
+        .pipe(gulp.dest(paths.sprites.release))
         .pipe(debug({
             "title": "Sprites"
         }))
