@@ -1,6 +1,5 @@
 import "./import/modules";
 import "./import/components";
-import tablesort from "tablesort";
 import players from "./import/players.json";
 
 players.forEach( obj => {

@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -563,8 +565,14 @@ input::placeholder {
   margin-bottom: 0;
 }
 
-.table-main .tbody .tr .td:first-child {
+.table-main .tbody .td:first-child {
   padding-left: 20px;
+}
+
+.table-main .tbody::-webkit-scrollbar {
+  width: 5px;
+  /* ширина для вертикального скролла */
+  background-color: #143861;
 }
 
 .table-main .tr {
