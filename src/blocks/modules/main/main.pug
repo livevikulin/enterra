@@ -7,9 +7,9 @@
 					include ../../components/input/input
 				.table-top__block
 					label Онлайн
-						input(type="checkbox")
+						input(type="checkbox").js-checkbox
 				.table-top__block
-					+btn("Показать всех")
+					+btn("Показать всех")(class="show-all")
 			.table-main#table-id
 				.thead
 					.tr
@@ -38,3 +38,17 @@
 										g
 										image(width='16' height='18' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAA7klEQVQ4T63TuUoFMRiG4eeIpZelgiAoLsdCC9dG8QIErSy8gIOVa6GFKwqCoF6WpYgEJhKOmcwMmC75v+9N8i895bWHTwzqZL2CfxG3VXwS7zltHaCPm8TwhSl8DENygGVcZW77xjRe09gwYBUXDXmZxXPUpIBNnDSYY3gej2ETAes4a2mOsgU8BMA+Djuao3ynVMZWzH8BbOO41XV/RQfxBSGr9x0hGzhPvzAXstoSsoXTtIzRN4OnBsgaLnONFM9Cz79gJANawXWplWNsvOr50US8lEzn73GpjBN4q5RhOu+6jHPU7mIMR3V5+QHaVh/5cGvgzQAAAABJRU5ErkJggg==')
 				.tbody
+					.tr
+						.td 1
+						.td
+							span Player
+						.td
+							.rating
+								include ../../components/star/star
+								include ../../components/star/star
+								include ../../components/star/star
+						.td
+							span.online.on
+						.more-info
+							a(href="#").show-profile Показать профиль
+							a(href="#").hide-player Скрыть игрока
