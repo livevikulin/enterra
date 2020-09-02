@@ -32,5 +32,5 @@ players.forEach( obj => {
 	tr.appendChild(td2);
 	tr.appendChild(td3);
 	tr.appendChild(td4);
-
+	
 });
