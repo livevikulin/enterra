@@ -170,8 +170,8 @@ var search = document.querySelector('.js-input');
 search.addEventListener('input', function (_ref) {
   var target = _ref.target;
   var newPlayers = _import_players_json__WEBPACK_IMPORTED_MODULE_2__.filter(function (player) {
-    var name = player.name.toUpperCase();
-    var valueInput = target.value.toUpperCase();
+    var name = player.name.toUpperCase(),
+        valueInput = target.value.toUpperCase();
     return name.includes(valueInput);
   });
   var tbody = document.querySelector('.tbody');

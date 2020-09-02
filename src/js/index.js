@@ -9,8 +9,8 @@ let search = document.querySelector('.js-input');
 
 search.addEventListener('input', function({target}) {
 	let newPlayers = players.filter( player => {
-		let name = (player.name).toUpperCase();
-		let valueInput = (target.value).toUpperCase();
+		let name = (player.name).toUpperCase(),
+			valueInput = (target.value).toUpperCase();
 		return name.includes(valueInput)
 	})
 
