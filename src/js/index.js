@@ -6,8 +6,65 @@ import players from "./import/players.json";
 renderTable(players);
 onlinePLayer();
 
+let sortingId = document.querySelector('.sorting-id'),
+	sortingName = document.querySelector('.sorting-name'),
+	sortingLevel = document.querySelector('.sorting-level');
 let search = document.querySelector('.js-input');
+let tbody = document.querySelector(".tbody");
+let showBtn = document.querySelector('.show-all');
+let toggleId = false;
 
+//сортировка по id
+sortingId.addEventListener('click', function() {
+	const arraySort = players.sort(function(a, b) {
+		if (toggleId) return a.id - b.id;
+		return b.id - a.id;
+	});
+	toggleId = !toggleId;
+	tbody.innerHTML = '';
+	renderTable(arraySort);
+	onlinePLayer(arraySort);
+})
+
+//сортировка по имени
+sortingName.addEventListener('click', function() {
+	const arraySort = players.sort(function (a, b) {
+		if (toggleId) {
+			if (a.name < b.name) {
+				return 1;
+			  }
+			  if (a.name > b.name) {
+				return -1;
+			  }
+			  return 0;
+		}
+		if (a.name > b.name) {
+			return 1;
+		  }
+		  if (a.name < b.name) {
+			return -1;
+		  }
+		  return 0;
+	});
+	toggleId = !toggleId;
+	tbody.innerHTML = '';
+	renderTable(arraySort);
+	onlinePLayer(arraySort);
+})
+
+//сортировка по уровню
+sortingLevel.addEventListener('click', function() {
+	const arraySort = players.sort(function(a, b) {
+		if (toggleId) return a.level - b.level;
+		return b.level - a.level;
+	});
+	toggleId = !toggleId;
+	tbody.innerHTML = '';
+	renderTable(arraySort);
+	onlinePLayer(arraySort);
+})
+
+//поиск
 search.addEventListener('input', function({target}) {
 	let newPlayers = players.filter( player => {
 		let name = (player.name).toUpperCase(),
@@ -25,7 +82,7 @@ search.addEventListener('input', function({target}) {
 	onlinePLayer();
 });
 
-
+//получаем значение level и генерим кол-во звезд в зависимости от уровня
 function getStars( numberStars ) {
 	let htmlStars = "";
 
@@ -35,6 +92,7 @@ function getStars( numberStars ) {
 	return htmlStars;
 };
 
+//рендерим список игроков
 function renderTable(players) {
 	players.forEach( obj => {
 
@@ -46,18 +104,16 @@ function renderTable(players) {
 			td4 = document.createElement('div'),
 			moreInfo = document.createElement('div');
 
-	
-
-		tr.setAttribute("data-name",obj.name);
-		tr.setAttribute("data-stars",obj.level);
-		tr.setAttribute("data-online",obj.online);
+		tr.setAttribute("data-id", obj.id);
+		tr.setAttribute("data-name", obj.name);
+		tr.setAttribute("data-stars", obj.level);
+		tr.setAttribute("data-online", obj.online);
 		td1.className = 'td'; td1.innerHTML = obj.id;
 		td2.className = 'td'; td2.innerHTML = `<span>${ obj.name }</span>`;
 		td3.className = 'td'; td3.innerHTML = `<div class="rating">${ getStars(obj.level) }</div>`;
 		td4.className = 'td'; td4.innerHTML = `<span class="online ${ obj.online ? "on" : "off" }"></span>`;
 		tr.className = 'tr';
 		moreInfo.className = 'more-info'; moreInfo.innerHTML = `<a href="#" class="show-profile">Показать профиль</a><a href="#" class="hide-player">Скрыть игрока</a>`;
-
 
 		tbody.appendChild(tr);
 		tr.appendChild(td1);
@@ -68,6 +124,7 @@ function renderTable(players) {
 	});
 }
 
+//чекбокс "Онлайн"
 function onlinePLayer() {
 	let checkboxInput = document.querySelector('.js-checkbox'),
 		tr = document.querySelectorAll('.off');
@@ -75,24 +132,20 @@ function onlinePLayer() {
 	checkboxInput.addEventListener('click', function() {
 		window.onlyOnline = this.checked;
 		tr.forEach ( obj => {
+			console.log(obj.closest('.tr'));
 			obj.closest('.tr').style.display = this.checked ? "none" : "flex";
 		})
 	})
 }
 
-let showBtn = document.querySelector('.show-all'),
-	tr = document.querySelectorAll('.tbody>.tr');
-
+//показать всех игроков
 showBtn.addEventListener('click', function() {
-	tr.forEach( obj => {
-		obj.style.display = 'flex';
-		let a = obj.lastElementChild;
-		a.classList.remove('show');
-	})
+	tbody.innerHTML = '';
+	renderTable(players);
+	onlinePLayer(players);
 });
 
-const tbody = document.querySelector(".tbody");
-
+//попап с кнопками "Показать профиль" и "Скрыть игрока" + модалка с профилем игрока на которого кликнули
 if(tbody !== null) {
 	tbody.addEventListener("click", (e) => {
 		const node = e.target;
@@ -124,7 +177,7 @@ if(tbody !== null) {
 	});
 }
 
-
+//тянем данные с игрока на которого кликнули в модалку
 function putModalInfo(nodeTr) {
 	const name = nodeTr.dataset.name;
 	const stars = nodeTr.dataset.stars;
@@ -135,25 +188,10 @@ function putModalInfo(nodeTr) {
 	modalInfo.querySelector("span").innerHTML = online == "true" ? "Онлайн" : "Оффлайн";
 }
 
-// let sortingId = document.querySelector('.sorting-id');
-// let sortingName = document.querySelector('.sorting-name');
-// let isSort = true;
 
-// sortingId.addEventListener('click', function() {
-// 	let sortArray = sortId(players, isSort);
-// 	let tbody = document.querySelector('.tbody');
-// 	tbody.innerHTML = "";
-// 	renderTable(sortArray)
-// 	isSort = !isSort;
 
-// })
 
-// function sortId(player,isSort) {
-// 	if(isSort) {
-// 		return player.sort((a, b) => b.id - a.id)
-// 	}
-// 	return player.sort((a, b) => a.id - b.id);
-// }
+
 
 
 
