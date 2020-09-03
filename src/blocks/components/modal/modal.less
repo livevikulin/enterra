@@ -1,9 +1,13 @@
 .modal {
-	display: inline-flex;
+	display: none;
 	align-items: center;
 	box-shadow: 0 10px 9px rgba(0, 0, 0, 0.21);
 	background-color: #ffffff;
 	padding: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	&-info {
 		display: flex;
 		flex-direction: column;
@@ -22,6 +26,13 @@
 		font-family: 'Roboto';
 		font-size: 18px;
 		font-weight: 400;
+	}
+	svg {
+		width: 28px;
+		height: 30px;
+	}
+	&.show-modal {
+		display: inline-flex;
 	}
 }
 .rating {

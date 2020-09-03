@@ -74,13 +74,35 @@
 	.tbody {
 		height: 500px;
 		overflow-y: auto;
+		scrollbar-track-color: #b9b9b9;
+		scrollbar-face-color: #464646;
+		scrollbar-width: 4px;
 		.tr {
 			background-color: #d3d3d3;
 			margin-bottom: 4px;
 			padding: 10px 0;
+			cursor: pointer;
+			transition: 0.2s;
 			position: relative;
 			&:last-child {
 				margin-bottom: 0;
+			}
+			&:before {
+				position: absolute;
+				content: '';
+				display: block;
+				width: 5px;
+				height: 100%;
+				left: 0;
+				top: 0;
+				background: #58900c;
+				transition: 0.3s;
+				transform: translateX(-5px);
+			}
+			&:hover {
+				&:before {
+					transform: translateX(0);
+				}
 			}
 		}
 		.td {
@@ -102,16 +124,20 @@
 			border-radius: 4px;
 			background-color: #464646;
 		}
+		
 		.more-info	{
 			position: absolute;
 			left: 2px;
 			bottom: -120px;
-			display: inline-block;
+			display: none;
 			box-shadow: 0 10px 16px 1px rgba(0, 0, 0, 0.21);
 			border-radius: 10px;
 			background-color: #e2e2e2;
 			padding: 0 10px;
 			z-index: 1;
+			&.show {
+				display: inline-block;
+			}
 			a {
 				display: block;
 				color: #000000;
